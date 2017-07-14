@@ -20,7 +20,7 @@ pygame.mixer.music.play(0)
 
 pygame.event.wait()
 def text_box():
-    pygame.draw.rect(screen,pygame.Color("black"), (10,200,430,100), 5)
+    pygame.draw.rect(screen,pygame.Color("black"), (10,180,430,100), 5)
 def print_slow(str,int):
     x = 0
     y = int
@@ -28,22 +28,22 @@ def print_slow(str,int):
             if(keyboard.is_pressed('space')):
                 myfont = pygame.font.SysFont("monospace", 15)
                 label = myfont.render(letter, 1, (1,1,1))
-                screen.blit(label, (20 + x, 220 + y))
+                screen.blit(label, (20 + x, 200 + y))
                 x = x+10
                 time.sleep(.005)
                 pygame.display.update()
             else:
                 myfont = pygame.font.SysFont("monospace", 15)
                 label = myfont.render(letter, 1, (1,1,1))
-                screen.blit(label, (20 + x, 220 + y))
+                screen.blit(label, (20 + x, 200 + y))
                 x = x+10
                 time.sleep(.1)
                 pygame.display.update()
 
 def text1(word,x,y):
-    font = pygame.font.SysFont(None, 25)
-    text = font.render("{}".format(word), True, RED)
-    return screen.blit(text,(x,y))
+    myfont = pygame.font.SysFont("monospace", 15)
+    label = myfont.render(word, 1, (1,1,1))
+    return screen.blit(label,(x,y))
 
 def inpt(text, number):
     word=""
@@ -51,6 +51,11 @@ def inpt(text, number):
     pygame.display.flip()
     done = True
     while done:
+        for letter in word:
+            myfont = pygame.font.SysFont("monospace", 15)
+            label = myfont.render(word, 1, (1,1,1))
+            screen.blit(label,(230,220))
+            pygame.display.update()
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 pygame.quit()
@@ -127,6 +132,22 @@ def inpt(text, number):
                     word+=chr(event.key)
                 if event.key == pygame.K_9:
                     word+=chr(event.key)
+                if event.key == pygame.K_BACKSPACE and number == True:
+                    x_1 = 0
+                    word = word[:-1]
+                    screen.fill(pygame.Color("white"))
+                    text_box()
+                    text1("What's your name?", 20+x_1 ,220)
+                    x_1 = x_1 + 10
+                    screen.blit(red,(140,25))
+                if event.key == pygame.K_BACKSPACE and number == False:
+                    x = 0
+                    word = word[:-1]
+                    screen.fill(pygame.Color("white"))
+                    text_box()
+                    text1("...Erm, what is his name again?", 20+x ,220)
+                    x = x + 10
+                    screen.blit(blue,(140,25))
                 if event.key == pygame.K_RETURN:
                     done=False
                 if event.key == pygame.K_RETURN and word == "" and number == True:
@@ -143,7 +164,7 @@ while True:
             pygame.quit()
             sys.exit(0)
     screen.fill(pygame.Color("white"))
-    screen.blit(oak,(140,50))
+    screen.blit(oak,(140,25))
     text_box()
     print_slow("Hello there! Welcome to the world of" , 0)
     print_slow("POKEMON!" , 30)
@@ -151,14 +172,14 @@ while True:
         time.sleep(1)
     screen.fill(pygame.Color("white"))
     text_box()
-    screen.blit(oak,(140,50))
+    screen.blit(oak,(140,25))
     print_slow("My name is OAK!" + " People call me the", 0)
     print_slow("POKEMON PROF!", 30)
     while not keyboard.is_pressed("."):
         time.sleep(1)
     pygame.display.update()
     screen.fill(pygame.Color("white"))
-    screen.blit(nindorino,(140,50))
+    screen.blit(nindorino,(140,25))
     text_box()
     print_slow("This world is inhabited by creatures", 0 )
     print_slow("called POKEMON!", 30)
@@ -166,7 +187,7 @@ while True:
         time.sleep(1)
     pygame.display.update()
     screen.fill(pygame.Color("white"))
-    screen.blit(nindorino,(140,50))
+    screen.blit(nindorino,(140,25))
     text_box()
     print_slow( " For some people, POKEMON are pets." , 0)
     print_slow("Others use them for fights.", 30)
@@ -174,7 +195,7 @@ while True:
         time.sleep(1)
     pygame.display.update()
     screen.fill(pygame.Color("white"))
-    screen.blit(nindorino,(140,50))
+    screen.blit(nindorino,(140,25))
     text_box()
     print_slow("Myself... I study POKEMON as a profession." , 0)
     while not keyboard.is_pressed("."):
@@ -182,23 +203,22 @@ while True:
     pygame.display.update()
     screen.fill(pygame.Color("white"))
     text_box()
-    screen.blit(red,(140,50))
-    c = 3
-    if (c==3):
-        aiden = inpt("What's your name?", True)
+    screen.blit(red,(140,25))
+    aiden = inpt("What's your name?", True)
+    pygame.display.update()
     while not keyboard.is_pressed("."):
         time.sleep(1)
     pygame.display.update()
     screen.fill(pygame.Color("white"))
     text_box()
-    screen.blit(red,(140,50))
+    screen.blit(red,(140,25))
     print_slow("Right! So your name is " + aiden , 0)
     while not keyboard.is_pressed("."):
         time.sleep(1)
     pygame.display.update()
     screen.fill(pygame.Color("white"))
     text_box()
-    screen.blit(blue,(140,50))
+    screen.blit(blue,(140,25))
     print_slow("This is my grandson. He's been your", 0)
     print_slow("rival since you were a baby.",30)
     while not keyboard.is_pressed("."):
@@ -206,16 +226,14 @@ while True:
     pygame.display.update()
     screen.fill(pygame.Color("white"))
     text_box()
-    screen.blit(blue,(140,50))
-    c = 4
-    if(c == 4):
-        cohen = inpt("...Erm, what is his name again?" , False)
+    screen.blit(blue,(140,25))
+    cohen = inpt("...Erm, what is his name again?" , False)
     while not keyboard.is_pressed("."):
         time.sleep(1)
     pygame.display.update()
     screen.fill(pygame.Color("white"))
     text_box()
-    screen.blit(blue,(140,50))
+    screen.blit(blue,(140,25))
     print_slow("That's right! I remember now!", 0)
     print_slow( "His name is " + cohen , 30)
     while not keyboard.is_pressed("."):
@@ -223,7 +241,7 @@ while True:
     pygame.display.update()
     screen.fill(pygame.Color("white"))
     text_box()
-    screen.blit(red,(140,50))
+    screen.blit(red,(140,25))
     print_slow(aiden + " " + "Your very own POKEMON legend is about" , 0 )
     print_slow("to unfold!" + " A world of dreams and " , 30)
     while not keyboard.is_pressed("."):
@@ -231,7 +249,7 @@ while True:
     pygame.display.update()
     screen.fill(pygame.Color("white"))
     text_box()
-    screen.blit(red,(140,50))
+    screen.blit(red,(140,25))
     print_slow("adventures with POKEMON awaits! Let's go!",0)
 
     break
