@@ -20,8 +20,8 @@ try:
    smtpObj = smtplib.SMTP('localhost')
 
     while True:
-        time.sleep(600)
         smtpObj.sendmail(sender, receivers, message)
+         time.sleep(600)
     while True:
         time.sleep(172800)
         random2 = random1[y[0]] +  random1[y[1]] + random1[y[2]]  + random1[y[3]]  + random1[y[4]]  + random1[y[5]]  + random1[y[6]]  + random1[y[7]]  + random1[y[8]]  + random1[y[9]]  + random1[y[10]] 
